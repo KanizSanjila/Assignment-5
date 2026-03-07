@@ -1,3 +1,4 @@
+// login page
 const issueContainer = document.getElementById("issueContainer")
 
 let allIssues = []
@@ -24,10 +25,26 @@ alert("Invalid credentials")
 
 }
 
+// login page end
+
+function showSpinner(){
+
+document.getElementById("spinner").classList.remove("hidden")
+
+}
+
+function hideSpinner(){
+
+document.getElementById("spinner").classList.add("hidden")
+
+}
+
 
 // LOAD ALL ISSUES
 
 async function loadIssues(){
+
+showSpinner()
 
 const res = await fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues")
 
@@ -35,6 +52,7 @@ const data = await res.json()
 
 allIssues = data.data
 
+hideSpinner()
 displayIssues(allIssues)
 
 }
@@ -61,21 +79,29 @@ div.innerHTML =
 `
 <div class="card-body">
 
-<h2 class="card-title cursor-pointer text-blue-600"
-onclick="showModal(${issue.id})">
-
-${issue.title}
-
-</h2>
-
-<p>${issue.description}</p>
-
-<p class="text-sm">Author: ${issue.author}</p>
-
-<p class="text-sm">Priority: ${issue.priority}</p>
-
-<p class="text-sm">Status: ${issue.status}</p>
-
+ <div class="flex justify-between items-center">
+        <div><img  src="assets/Open-Status.png" alt=""></div>
+           <div><button class="bg-[#FEECEC] text-[#EF4444]  rounded-full py-1 px-5">${issue.priority}</button></div>
+        </div>
+<h2 class="card-title cursor-pointer text-[#1F2937]"
+onclick="showModal(${issue.id})">${issue.title}</h2>
+<p class="line-clamp-2">${issue.description}</p>
+<div class="flex gap-2 border-b-2 border-gray-400 p-6">
+  <div>
+    <button class="flex items-center gap-1 px-3 py-1 border bg-[#FEECEC] text-[#EF4444]  rounded-full">
+      <img src="assets/BugDroid.png" alt="" class="w-5 h-5">
+      Bug
+    </button>
+  </div>
+  <div>
+    <button class="flex items-center gap-1 px-3 py-1 border bg-[#FDE68A] text-[#D97706] rounded-full">
+      <img src="assets/Vector.png" alt="" class="w-5 h-5">
+      Help Wanted
+    </button>
+  </div>
+</div>
+<p class="text-sm">#${issue.id} by ${issue.author}</p>
+<p class="text-sm">${issue.createdAt}</p>
 </div>
 `
 
@@ -112,7 +138,7 @@ displayIssues(data.data)
 }
 
 
-// MODAL
+// MODAL card
 
 async function showModal(id){
 
@@ -132,3 +158,14 @@ document.getElementById("modalInfo").innerText =
 document.getElementById("issueModal").showModal()
 
 }
+
+// active tab
+// function setActive(btn){
+
+// document.getElementById("allTab").classList.remove("tab-active")
+// document.getElementById("openTab").classList.remove("tab-active")
+// document.getElementById("closedTab").classList.remove("tab-active")
+
+// btn.classList.add("tab-active")
+
+// }

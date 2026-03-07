@@ -4,3 +4,73 @@
 .geist{
   font-family: "Geist", sans-serif;
 }
+
+p{
+    color:#64748B;
+}
+
+.issue-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Pushes left and right content apart */
+  padding: 16px 24px;
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-family: sans-serif;
+}
+
+.issue-info {
+  display: flex;
+  align-items: center;
+  gap: 12px; /* Space between icon and text */
+}
+
+.icon-container {
+  width: 40px;
+  height: 40px;
+  background-color: #f0ebff; /* Light purple background */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.text-group h3 {
+  margin: 0;
+  font-size: 18px;
+  color: #333;
+}
+
+.text-group p {
+  margin: 4px 0 0 0;
+  font-size: 14px;
+  color: #666;
+}
+
+.status-markers {
+  display: flex;
+  gap: 20px;
+  font-size: 14px;
+  color: #444;
+}
+
+.status-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.dot.open {
+  background-color: #00b894; /* Green */
+}
+
+.dot.closed {
+  background-color: #a29bfe; /* Purple */
+}

@@ -102,11 +102,40 @@
 
 <div class="tabs tabs-boxed mb-6 bg-white shadow gap-1 p-3 rounded-lg">
 
-<button onclick="loadIssues()" class="tab tab-active btn" id="allTab">All</button>
+<button onclick="loadIssues()" class="tab tab-active btn btn-primary" id="allTab">All</button>
 
 <button onclick="filterIssues('open')" class="tab btn" id="openTab">Open</button>
 
 <button onclick="filterIssues('closed')" class="tab btn" id="closedTab">Closed</button>
+
+</div>
+
+<!-- count container -->
+ <div class="issue-card mb-3">
+  <div class="issue-info">
+    <div class="icon-container">
+      <img src="assets/Aperture.png" alt="icon">
+    </div>
+    <div class="text-group">
+      <h3>50 Issues</h3>
+      <p>Track and manage your project issues</p>
+    </div>
+  </div>
+
+  <div class="status-markers">
+    <div class="status-item">
+      <span class="dot open"></span> Open
+    </div>
+    <div class="status-item">
+      <span class="dot closed"></span> Closed
+    </div>
+  </div>
+</div>
+
+<!-- spinner -->
+<div id="spinner" class="text-center hidden">
+
+<span class="loading loading-spinner loading-lg"></span>
 
 </div>
 
