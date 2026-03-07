@@ -18,8 +18,128 @@
 <!-- font cdn -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
-<body class="geist">
-    <h1 class="text-7xl">kaniz</h1>
+<body class="geist bg-gray-100">
+  
+<!-- LOGIN PAGE -->
+
+<div id="loginPage" class="flex justify-center items-center h-screen">
+<div class="card bg-white p-6 w-96 shadow">
+    <div class="flex justify-center items-center">
+        <img src="assets/github-logo.png" alt="">
+    </div>
+ 
+<h2 class="text-2xl font-bold text-center">GitHub Issues Tracker</h2>
+<p class="text-center mb-4 text-[#64748B]">Sign in to manage your issues</p>
+
+<label>Username</label>
+<input id="username" type="text" placeholder="Username" class="input input-bordered w-full">
+<p class="text-[#4A00FF] mb-3 text-[14px]">Default: admin</p>
+
+<input id="password" type="password" placeholder="Password" class="input input-bordered w-full">
+<p class="text-[#4A00FF] mb-3 text-[14px]">Default: admin123</p>
+
+<button onclick="login()" class="btn btn-primary w-full">Sign In</button>
+
+<div class="flex items-center gap-2 mt-5">
+    <hr class="flex-1 opacity-50">
+    <small>OR</small>
+    <hr class="flex-1 opacity-50">
+</div>
+
+<p class="text-center text-[14px] mt-4">Demo Credentials:</p>
+<div class="bg-[#F8FAFC] p-3 m-1 rounded-lg">
+<p class="text-sm text-center">
+<span class="font-bold">Username:</span> admin <br>
+<span class="font-bold">Password:</span> admin123
+</p>
+</div>
+
+</div>
+</div>
+
+
+<!-- MAIN PAGE -->
+
+<div id="mainPage" class="hidden">
+
+<!-- Navbar -->
+
+<div class="navbar bg-white shadow flex justify-between">
+
+<div class="flex justify-center items-center text-xl font-bold ml-4">
+ <div><img class="w-[50px] h-[50px]" src="assets/github-logo.png" alt=""></div>
+<p>GitHub Issues Tracker</p>
+</div>
+
+<div class="flex gap-2 mr-4">
+<label class="input">
+  <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <g
+      stroke-linejoin="round"
+      stroke-linecap="round"
+      stroke-width="2.5"
+      fill="none"
+      stroke="currentColor"
+    >
+      <circle cx="11" cy="11" r="8"></circle>
+      <path d="m21 21-4.3-4.3"></path>
+    </g>
+  </svg>
+  <input id="searchInput" type="search" required placeholder="Search issues..."/>
+</label>
+<!-- <input id="searchInput" type="text" placeholder="Search issues..." class="input input-bordered"> -->
+
+<button onclick="searchIssue()" class="btn btn-primary">+New Issue</button>
+
+</div>
+
+</div>
+
+
+<!-- Tabs -->
+
+<div class="p-6">
+
+<div class="tabs tabs-boxed mb-6 bg-white shadow gap-1 p-3 rounded-lg">
+
+<button onclick="loadIssues()" class="tab tab-active btn" id="allTab">All</button>
+
+<button onclick="filterIssues('open')" class="tab btn" id="openTab">Open</button>
+
+<button onclick="filterIssues('closed')" class="tab btn" id="closedTab">Closed</button>
+
+</div>
+
+<!-- Issues Container -->
+
+<div id="issueContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- Modal -->
+
+<dialog id="issueModal" class="modal">
+<div class="modal-box">
+
+<h3 id="modalTitle" class="font-bold text-lg"></h3>
+
+<p id="modalDescription" class="py-4"></p>
+
+<p id="modalInfo"></p>
+
+<div class="modal-action">
+<form method="dialog">
+<button class="btn">Close</button>
+</form>
+</div>
+
+</div>
+</dialog>
     <script src="script.js"></script>
 </body>
 </html>
