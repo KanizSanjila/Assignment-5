@@ -52,6 +52,9 @@ function displayIssues(issues){
 
 issueContainer.innerHTML = ""
 
+document.getElementById("issueCount").innerText =
+`${issues.length} Issues`
+
 issues.forEach(issue => {
 
 const div = document.createElement("div");
@@ -86,7 +89,7 @@ onclick="showModal(${issue.id})">${issue.title}</h2>
   </div>
 </div>
 <p class="text-sm">#${issue.id} by ${issue.author}</p>
-<p class="text-sm">${issue.createdAt}</p>
+<p class="text-sm">${issue.createdAt.split("T")[0]}</p>
 </div>
 `
 
@@ -95,7 +98,6 @@ issueContainer.appendChild(div)
 })
 
 }
-
 
 // FILTER
 
@@ -107,6 +109,34 @@ displayIssues(filtered)
 
 }
 
+// btn-2
+function filterOpen(){
+const openIssues =
+allIssues.filter(issue => issue.status === "open")
+
+displayIssues(openIssues)
+
+}
+
+// btn-3
+function filterClosed(){
+
+const closedIssues =
+allIssues.filter(issue => issue.status === "closed")
+
+displayIssues(closedIssues)
+
+}
+
+function setActive(btn){
+
+document.querySelectorAll(".tab").forEach(tab => {
+tab.classList.remove("bg-primary","text-white")
+})
+
+btn.classList.add("bg-primary","text-white")
+
+}
 
 // SEARCH
 
@@ -132,26 +162,14 @@ const res = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issue/${id
 const data = await res.json()
 
 const issue = data.data
-
 document.getElementById("modalTitle").innerText = issue.title
 document.getElementById("statusBtn").innerText = issue.status
-document.getElementById("AssigneeBy").innerText = `${issue.status} by ${issue.assignee}  ${issue.createdAt}`
+document.getElementById("AssigneeBy").innerText = `${issue.status} by  ${issue.assignee || "Fahim Ahmed"} ${issue.createdAt}`
 
 document.getElementById("modalDescription").innerText = issue.description
-document.getElementById("AssigneePerson").innerText = issue.assignee
+document.getElementById("AssigneePerson").innerText = `${issue.assignee || "Fahim Ahmed"}`
 document.getElementById("PriorityLevel").innerText = issue.priority
 
 document.getElementById("issueModal").showModal()
 
 }
-
-// active tab
-// function setActive(btn){
-
-// document.getElementById("allTab").classList.remove("tab-active")
-// document.getElementById("openTab").classList.remove("tab-active")
-// document.getElementById("closedTab").classList.remove("tab-active")
-
-// btn.classList.add("tab-active")
-
-// }
