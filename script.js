@@ -55,8 +55,8 @@ issueContainer.innerHTML = ""
 document.getElementById("issueCount").innerText =
 `${issues.length} Issues`
 
+// issue.labels[0]?issue.labels[0] : "none"
 issues.forEach(issue => {
-
 const div = document.createElement("div");
 const borderColor =issue.status === "open" ? "border-green-500" : "border-purple-500";
 const img =issue.status === "open"? "assets/Open-Status.png":"assets/Closed- Status .png";
@@ -67,29 +67,37 @@ div.innerHTML =
 `
 <div class="card-body">
 
- <div class="flex justify-between items-center">
-        <div><img src="${img}" alt=""></div>
-           <div><button class="bg-[#FEECEC] text-[#EF4444]  rounded-full py-1 px-5">${issue.priority}</button></div>
-        </div>
-<h2 class="card-title cursor-pointer text-[#1F2937]"
-onclick="showModal(${issue.id})">${issue.title}</h2>
-<p class="line-clamp-2">${issue.description}</p>
-<div class="flex gap-2 border-b-2 border-gray-400 p-6">
+<div class="flex justify-between items-center">
+  <div><img src="${img}" alt=""></div>
   <div>
-    <button class="flex items-center gap-1 px-3 py-1 border bg-[#FEECEC] text-[#EF4444]  rounded-full">
-      <img src="assets/BugDroid.png" alt="" class="w-5 h-5">
-      Bug
-    </button>
-  </div>
-  <div>
-    <button class="flex items-center gap-1 px-3 py-1 border bg-[#FDE68A] text-[#D97706] rounded-full">
-      <img src="assets/Vector.png" alt="" class="w-5 h-5">
-      Help Wanted
+    <button class="bg-[#FEECEC] text-[#EF4444] rounded-full py-1 px-5">
+      ${issue.priority}
     </button>
   </div>
 </div>
+
+<h2 class="card-title cursor-pointer text-[#1F2937]"
+onclick="showModal(${issue.id})">${issue.title}</h2>
+
+<p class="line-clamp-2">${issue.description}</p>
+
+<div class="flex gap-2 border-b-2 border-gray-400 p-6">
+
+  ${issue.labels[0] ? `
+  <button class="flex items-center gap-1 px-3 py-1 border bg-[#FEECEC] text-[#EF4444] rounded-full">
+    ${issue.labels[0]}
+  </button>` : ""}
+
+  ${issue.labels[1] ? `
+  <button class="flex items-center gap-1 border bg-[#FDE68A] text-[#D97706] rounded-full">
+    ${issue.labels[1]}
+  </button>` : ""}
+
+</div>
+
 <p class="text-sm">#${issue.id} by ${issue.author}</p>
 <p class="text-sm">${issue.createdAt.split("T")[0]}</p>
+
 </div>
 `
 
@@ -165,7 +173,11 @@ const issue = data.data
 document.getElementById("modalTitle").innerText = issue.title
 document.getElementById("statusBtn").innerText = issue.status
 document.getElementById("AssigneeBy").innerText = `${issue.status} by  ${issue.assignee || "Fahim Ahmed"} ${issue.createdAt}`
+const btn1 = document.getElementById('btn1');
+const btn2 = document.getElementById('btn2');
 
+issue.labels[0] ? btn1.innerText = issue.labels[0] : btn1.style.display = "none";
+issue.labels[1] ? btn2.innerText = issue.labels[1] : btn2.style.display = "none";
 document.getElementById("modalDescription").innerText = issue.description
 document.getElementById("AssigneePerson").innerText = `${issue.assignee || "Fahim Ahmed"}`
 document.getElementById("PriorityLevel").innerText = issue.priority
